@@ -1,0 +1,564 @@
+1] DEMONSTRATE ARRAY FUNCTIONS USING NUMPY
+import numpy as np
+a= np.array([10,15,20,25,30])
+print(a)
+sum = np.sum(a)
+print("The sum=-",sum)
+avg=np.mean(a)
+print(" The averge =",avg)
+mid=np.median(a)
+print(" The median =",mid)
+minimum=np.min(a)
+print (" The minimum value=",minimum)
+maximum=np.max(a)
+print ("The maximum value =",maximum)
+min_index=np.argmin(a)
+print("The minimum index is =",min_index)
+max_index=np.argmax(a)
+print("The maximum index is=",max_index)
+std_dev=np.std(a)
+print("The standard deviation=",std_dev)
+variance=np.var(a)
+print("The variation=",variance)
+
+2] PANDAS AGGREGATE FUNCTION
+import pandas as pd
+df=pd.DataFrame([[1,2,3],[4,5,6],[7,8,9]],columns=['Maths','English','Science'])
+print(df)
+print(df.sum())
+print(df.describe())
+print(df.agg(['sum','min','max']))
+a=df.groupby('Maths')
+print(a.first())
+
+3] VECTORIZED ARTHMETIC OPERATIONS USING NUMPY 
+import numpy as np
+print(np.sum(np.arange(10000)))
+print(2*np.array([10.2,3.5,-0.9])-np.array([8.2,3.5,6.5]))
+print(np.dot(np.array([1,-3,4]),np.array([2,0,1])))
+
+A=np.array([[0,1,2],
+[3, 4, 5],
+[6, 7, 8]])
+print ("\n The matrix A is \n",A)
+print("\n Square of matrix A \n",A**2)
+print("\n Cube of matrix A \n",A**3)
+sqrt_A =np.sqrt(A)
+print("\n The square of eac element of A is \n", sqrt_A)
+B=np.array([[ 0, 1, 2],
+[3, 4, 5],
+[6, 7, 8]])
+
+print ("\n The matrix B is \n",B)
+print("The sum tarts from here..n")
+C=A+B
+print("\n The sum of A and B is \n",C)
+print("nThe sum of A and B is \n",np.add(A,B))
+print("\n The multiplication begins from here. \n")
+Sca_M=A *B
+print("\n The product of A andB is In",Sca_M)
+print("\n The sum of elements of Matrix A is =", np.sum(A))
+print("\n The average of elements of Matrix A is=", np.mean(A))
+print("\n The standard deviation of elements of Matrix A is =",np.std(A))
+print("\n The variance of elements of Matrix A is",np.var(A))
+print("\n The maximum of elements of Matrix A is=",np.max(A))
+print("\n The minimum of elements of Matrix A is =",np.min(A))
+print("\n The maximum of elements of Matrix A is =",np.max(A,axis=0))
+print("\n The maximum of elements of Matrix A is =",np.max(A,axis=1))
+print("\n The order of the matrix A \n",A.shape)
+print("\n The number of element of the matrix \n",A.size)
+print("\n Returns class type \n",type(A))
+print("\n Returnsin",A[0,1:])
+print("\n Returns \n",A[:2,:2])
+print("\n Return\n",A[2,2:])
+print("\n Returns \n",A[1:3,1:2])
+
+4] TIME SERIES OPERATION IN PANDAS
+import pandas as pd
+from datetime import datetime
+import numpy as np
+range_date = pd.date_range(start='1/10/2023',end='31//10/2023',freq='Min')
+print(range_date)
+print (type([0]))
+
+import pandas as pd
+from datetime import datetime
+import numpy as np
+range_date=pd.date_range(start='1/10/2023',end='31//10/2023',freq='Min')
+df=pd.DataFrame(range_date,columns=['date'])
+df['data']=np.random.randint(0,100,size=(len(range_date)))
+string_data = [str(x) for x in range_date]
+print(string_data[1:11])
+
+5] USE MAP,FILTER,REDUCE AND LAMBDA FUNCTION
+#Use map func
+students = [
+            {"name": "John Doe",
+             "father name": "Robert Doe",
+             "Address": "123 Hall street"
+             },
+            {
+              "name": "Rahul Garg",
+              "father name": "Kamal Garg",
+              "Address": "3-Upper-Street corner"
+            },
+            {
+              "name": "Angela Steven",
+             "father name": "Jabob steven",
+             "Address": "Unknown"
+            }
+]
+print(list(map(lambda student: student['name'], students)))
+print(list(map(lambda student: student['Address'], students)))
+
+arr = [2,4,6,8]
+arr = list(map(lambda x: x*x, arr))
+print(arr)
+
+5] Use Map  and lambda function
+import numpy as np
+import pandas as pd
+tech={'Fees': [20000,25000,23000,np.NaN,26000],
+     'Duration':['30 Days','50 Days','30 Days','35 Dys','40 Days']}
+df=pd.DataFrame(tech)
+print(df)
+
+5] lambda function
+df['Fees']= df['Fees'].map(lambda x:x==(x*10/100))
+print(df)
+
+5] Filter unction
+import numpy as np
+import pandas as pd
+df=pd.DataFrame(np.array([[2,3,4],[5,6,7]]),
+index=['tiger','lion'],columns=['one','two','three'])
+print(df.filter(items=['one','three']))
+print(df.filter(regex='e$',axis=1))
+
+age = [12, 18, 20, 19, 22, 15, 17, 19]
+result =  list(filter(lambda x:x>=18, age))
+print("Age greater than or equal to 18")
+print(result)
+
+5] Using Reduce functions:
+from functools import reduce
+lst = [2,4,6,8]
+max=reduce(lambda x,y:x if x>y else y,lst)
+print(max)
+min=reduce(lambda x,y:x if x<y else y,lst)
+print(min)
+
+from functools import reduce
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+result = reduce(lambda a, b: a+b, numbers)
+print("The sum of the list items is:", result)
+
+6] HANDLING MISSING DATA
+import pandas as pd
+import numpy as np
+dict = {    
+'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, 45, 56, np.nan],
+       'Third Score':[np.nan, 40, 80, 98]  
+}
+df = pd.DataFrame(dict)
+df.isnull ()
+
+import pandas as pd
+data = pd.read_csv(r"C:\\Users\\\\OneDrive\\Documents\\employees.csv")
+df=pd.DataFrame(data["MANAGER_ID"])
+df.isnull()
+
+import pandas as pd
+import numpy as np
+dict = {    
+'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, 45, 56, np.nan],
+       'Third Score':[np.nan, 40, 80, 98]  
+}
+df = pd.DataFrame(dict)
+df.notnull()
+
+import pandas as pd
+data = pd.read_csv(r"C:\\Users\\\\OneDrive\\Documents\\employees.csv")
+df=pd.DataFrame(data["MANAGER_ID"])
+df.notnull ()
+
+6] USE OF FILLNA
+import pandas as pd
+import numpy as np
+dict = {    
+'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, 45, 56, np.nan],
+       'Third Score':[np.nan, 40, 80, 98]  
+}
+df = pd.DataFrame(dict)
+df.fillna (5)
+
+import pandas as pd
+import numpy as np
+dict = {    
+'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, 45, 56, np.nan],
+       'Third Score':[np.nan, 40, 80, 98]  
+}
+df = pd.DataFrame(dict)
+df.fillna(method='pad')   
+
+import pandas as pd
+import numpy as np
+dict = {    
+'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, 45, 56, np.nan],
+       'Third Score':[np.nan, 40, 80, 98]  
+}
+df = pd.DataFrame(dict)
+df.fillna(method='bfill')
+
+6] DROPPING ROWS AND COLUMNS
+import pandas as pd
+import numpy as np
+dict = {     'First Score':[100, 90, np.nan, 95],
+    'Second Score': [30,  np.nan,45, 56,],
+    'Third Score':[np.nan, 40, 80, 98],
+    'Fourth Score':[np.nan, np.nan, np.nan, 65] 
+        }
+df = pd.DataFrame(dict)
+print(df)
+df.dropna ()
+
+print(df)
+df.dropna(axis=1)
+
+7] FUNCTION ON IRIS DATA SET
+import pandas as pd
+data=pd.read_csv('http://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data', header=None)
+data.columns=['sepal length ', 'sepal width', 'petal length', 'petal width','class']
+data.head()
+
+from pandas.api.types import is_numeric_dtype
+for col in data.columns:
+    if is_numeric_dtype(data[col]):
+        print('%s'%(col))
+        print('\t Mean=%.2f'%data[col].mean()) 
+        print('\t Standard Deviation=%.2f'%data[col].std())
+        print('\t Minimum=%.2f'%data[col].min()) 
+        print('\t Maximum=%.2f'%data[col].max()) 
+        data['class'].value_counts()
+        data.describe(include='all')
+        print('covariance')
+        data.cov()
+        %matplotlib inline
+        data['sepal length '].hist(bins=8)
+        data.boxplot()
+
+8] SIMPLE LINEAR REGRESSION
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+data_set= pd.read_csv(r"C:\\Users\\\\OneDrive\\Documents\\salary.csv")
+x= data_set.iloc[:, :-1].values
+y= data_set.iloc[:, 1].values
+print(x)
+print(y)
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test= train_test_split(x, y, test_size= 1/3, random_state=0)
+from sklearn.linear_model import LinearRegression
+regressor= LinearRegression()
+regressor.fit(x_train, y_train)
+y_pred= regressor.predict(x_test)
+x_pred= regressor.predict(x_train)
+x_pred
+plt.scatter(x_train,y_train,color="green")
+plt.plot(x_train,x_pred,color="red")
+plt.title("Salary vs Experience (Training Dataset")
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary(In Rupees)")
+plt.show()
+plt.scatter(x_test,y_test, color="blue")
+plt.plot(x_train,x_pred,color="red")
+plt.title("Salary vs Experience (Test Dataset)")
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary(In Rupees)")
+plt.show()
+
+9] IMPLEMENT MULTIPLE REGRESSION
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+data=pd.read_csv(r"C:\\Users\\\OneDrive\\Documents\\salary.csv")
+display(data)
+x=data.iloc[:,:-1].values
+y=data.iloc[:,1].values
+print(x)
+print(y)
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+labelencoder_x=LabelEncoder()
+x[:,0]=labelencoder_x.fit_transform(x[:,0])
+onehotencoder=OneHotEncoder()
+x=onehotencoder.fit_transform(x).toarray()
+print(x)
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+from sklearn.linear_model import LinearRegression
+regressor=LinearRegression()
+regressor.fit(x_train,y_train)
+y_pred=regressor.predict(x_test)
+print('Train Score:',regressor.score(x_train,y_train))
+print('Test Score:',regressor.score(x_test,y_test))
+fig=plt.figure(figsize=(10,6))
+plt.scatter(y_test,y_pred)
+plt.xlabel('Position Levels')
+plt.ylabel('Predicted values')
+plt.title('Actual vs Predicted Values')
+plt.plot([min(y_test),max(y_test)],[min(y_test),max(y_test)],linestyle='--',color='blue')
+plt.show()
+
+10] IMPLEMENT POLYNOMIAL REGGRESSION
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+data_set= pd.read_csv("C:\\Users\\\\OneDrive\\Documents\\salary.csv")
+x= data_set.iloc[:,:-1].values
+y=data_set.iloc[:,1].values
+from sklearn.linear_model import LinearRegression
+lin_regs=LinearRegression()
+lin_regs.fit(x,y)
+from sklearn.preprocessing import PolynomialFeatures
+poly_regs=PolynomialFeatures(degree=2)
+x_poly=poly_regs.fit_transform(x)
+lin_reg_2=LinearRegression()
+lin_reg_2.fit(x_poly,y)
+plt.scatter(x,y,color="blue")
+plt.plot(x,lin_regs.predict(x), color="red")
+plt.title("Bluff detection model(Linear Regression)")
+plt.xlabel("Position Levels")
+plt.ylabel("Salary")
+plt.show()
+plt.scatter(x,y,color="blue")
+plt.plot(x,lin_reg_2.predict(poly_regs.fit_transform(x)),color="red") 
+plt.title("Bluff detection model(Polynomial Regression)")
+plt.xlabel("Position Levels")
+plt.ylabel("Salary")
+plt.show()
+
+11] IMPLEMENT DECISION TREE
+import numpy as np 
+import matplotlib.pyplot as mtp  
+import pandas as pd  
+data=pd.read_csv("C:\\Users\\\\OneDrive\\Documents\\User_Data.csv")
+x= data.iloc[:, [2,3]].values  
+y= data.iloc[:, 4].values  
+print(y)
+from sklearn.model_selection import train_test_split  
+x_train, x_test, y_train, y_test= train_test_split(x, y, test_size= 0.25, random_state=0)  
+from sklearn.preprocessing import StandardScaler    
+st= StandardScaler()  
+x_train= st.fit_transform(x_train)    
+x_test= st.transform(x_test)  
+from sklearn.tree import DecisionTreeClassifier  
+classifier= DecisionTreeClassifier(random_state=0)  
+classifier.fit(x_train, y_train) 
+y_pred= classifier.predict(x_test) 
+from sklearn.metrics import confusion_matrix  
+cm= confusion_matrix(y_test, y_pred)  
+print(cm)
+from matplotlib.colors import ListedColormap  
+x_set, y_set = x_train, y_train  
+x1, x2 = np.meshgrid(np.arange(start = x_set[:, 0].min() - 1, 
+stop = x_set[:, 0].max() + 1, step  =0.01), np.arange(start = x_set[:, 1].min() - 1,
+stop = x_set[:, 1].max() + 1, step = 0.01))  
+plt.contourf(x1, x2, classifier.predict(np.array([x1.ravel(), x2.ravel()]).T).reshape(x1.shape), 
+alpha = 0.75, cmap = ListedColormap(('purple','green' )))  
+plt.xlim(x1.min(), x1.max())  
+plt.ylim(x2.min(), x2.max())  
+for i, j in enumerate(np.unique(y_set)):  
+    plt.scatter(x_set[y_set == j, 0], x_set[y_set == j, 1],  
+    c = ListedColormap(('purple', 'green'))(i), label = j)  
+plt.title('Decision Tree Algorithm (Training set)')  
+plt.xlabel('Age')  
+plt.ylabel('Estimated Salary' )  
+plt.legend()  
+plt.show()
+
+12] IMPLEMENT RANDOM FOREST
+import numpy as np 
+import matplotlib.pyplot as plt
+import pandas as pd
+data_set= pd.read_csv(r"C:\Users\\OneDrive\Documents\User_Data.csv") 
+x= data_set.iloc[:, [2,3]].values  
+y= data_set.iloc[:, 4].values  
+from sklearn.model_selection import train_test_split  
+x_train, x_test, y_train, y_test= train_test_split(x, y, test_size= 0.25, random_state=0)   
+from sklearn.preprocessing import StandardScaler    
+st= StandardScaler()    
+x_train= st.fit_transform(x_train)    
+x_test= st.transform(x_test)  
+from sklearn.ensemble import RandomForestClassifier  
+classifier= RandomForestClassifier(n_estimators= 10, criterion="entropy")  
+classifier.fit(x_train, y_train)  
+y_pred= classifier.predict(x_test)  
+from sklearn.metrics import confusion_matrix  
+cm= confusion_matrix(y_test, y_pred)  
+print(cm)
+from matplotlib.colors import ListedColormap    
+x_set, y_set = x_train, y_train  
+x1, x2 = np.meshgrid(np.arange(start = x_set[:, 0].min() - 1, stop = x_set[:, 0].max() + 1, step  =0.01),  
+np.arange(start = x_set[:, 1].min() - 1, stop = x_set[:, 1].max() + 1, step = 0.01))  
+plt.contourf(x1, x2, classifier.predict(np.array([x1.ravel(), x2.ravel()]).T).reshape(x1.shape),  
+alpha = 0.75, cmap = ListedColormap(('purple','green' )))  
+plt.xlim(x1.min(), x1.max())  
+plt.ylim(x2.min(), x2.max())  
+for i, j in enumerate(np.unique(y_set)):  
+    plt.scatter(x_set[y_set == j, 0], x_set[y_set == j, 1],  
+    c = ListedColormap(('purple', 'green'))(i), label = j)  
+plt.title('Random Forest Algorithm (Training set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+13] DATA VISUALIZATION USING PYTHON
+#BAR CHART
+import matplotlib.pyplot as plt
+import pandas as pd
+x=['Grocery', 'Rent', 'Education of Children', 'Medicine', 'Fuel','Entertainment',
+'Miscellaneous']
+y= [4,5,5,2,2,1,1]
+plt.bar(x, y, color='green',edgecolor='blue',linewidth=2)
+plt.title("Family Monthly plan")
+plt.ylabel('Expenditure (in thousand rupees)')
+plt.xlabel('Heads')
+plt.xticks(x, rotation=45)
+plt.show()
+
+#HISTOGRAM
+import matplotlib.pyplot as plt
+x=[22, 87, 5, 43, 56, 73, 55, 54, 11, 20, 51, 5, 79, 31, 27]
+plt.hist(x, bins=[0,20,40,60,80,100], color='green', edgecolor='red', linestyle='-')
+plt.title("Dataset")
+plt.ylabel('Frequency')
+plt.xlabel('Total Bill')
+plt.show()
+
+#PIE CHART
+import matplotlib.pyplot as plt
+cars=['AUDI', 'BMW', 'FORD', 'TESLA','JAGUAR']
+data=[23,13,35,15,12]
+explode=[0.1,0.5,0,0,0]
+colors=("orange","cyan","yellow","grey","green",)
+plt.pie(data,labels=cars,explode=explode,autopct='%1.2F%%',colors=colors,shadow=True)
+plt.show()
+
+#SCATTER PLOT:
+import matplotlib.pyplot as plt
+price = [2.50, 1.23, 4.02, 3.25, 5.00, 4.40]
+sales = [34, 62, 49, 22, 13, 19]
+plt.scatter(price, sales, c='RED', s=60,marker='D', alpha=1)
+plt.title("Dataset")
+plt.ylabel('price')
+plt.xlabel('sales')
+plt.show()
+plt.show()
+
+#Line Graph:
+import matplotlib.pyplot as plt
+x=[10, 20, 30, 40]
+y= [20, 25, 35, 55]
+plt.title("LINE CHART")
+fig = plt.figure(figsize=(7, 5), facecolor='g',edgecolor='b', linewidth=7)
+ax = fig.add_axes([1, 1, 1, 1])
+ax.plot(x, y)
+plt.xticks(x, labels=["one", "two", "three", "four"])
+plt.plot(x, y, color='green', linewidth=3, marker='o',markersize=15, linestyle='--')
+plt.legend(["GFG"])
+fig = plt.figure(figsize=(5, 4))
+ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+ax2=fig.add_axes([1, 0.1, 0.8, 0.8])
+ax1.plot(x, y)
+ax2.plot(y, x)
+plt.ylabel('Y-Axis')
+plt.xlabel('X-Axis')
+plt.ylim(0,80)
+plt.subplot(122)
+plt.plot(y,x)
+plt.subplot(121)
+plt.plot(x,y)
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+data_set=pd.read_csv(r"C:\\Users\\kavee\\OneDrive\\Documents\\salary.csv")
+display(data_set)
+sns.scatterplot(x="YearsExperience",y="Salary",data=data_set)
+
+14] NUMPY FUNCTIONS ON DATASETS
+import pandas as pd
+import numpy as np
+data=pd.read_csv("C:\\Users\\\\Downloads\\auto-mpg.csv")
+data.head()
+
+data.tail()
+
+data.info()
+
+data.describe()
+
+data.size
+
+data.shape
+
+15]DIMENSION REDUCTION
+#Dimension Reductions
+from sklearn import datasets
+import pandas as pd 
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+import seaborn as sns
+iris=datasets.load_iris()
+df=pd.DataFrame(iris['data'], columns=iris['feature_names'])
+df.head ()
+scalar=StandardScaler()
+scaled_data= pd.DataFrame (scalar.fit_transform (df))
+scaled_data
+sns.heatmap(scaled_data.corr())
+pca=PCA(n_components=3)
+pca.fit(scaled_data)
+data_pca=pca.transform(scaled_data)
+data_pca=pd.DataFrame(data_pca,columns=['PC1','PC2','PC3'])
+sns.heatmap (data_pca.corr())
+
+16] NUMPY FUNCTIONS ON DATASETS
+#Numpy function on datasets
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+iris=pd.read_csv("C:\\Users\\\\Downloads\\iris_mpg.csv")
+display(iris)
+#Plot scatter by comparing
+fig=iris[iris.variety=='Setosa'].plot.scatter(x='petal.length',y='petal.width',color='orange',label='Setosa')
+iris[iris.variety=='Versicolor'].plot.scatter(x='petal.length',y='petal.width',color='blue',label='Versicolor',ax=fig)
+iris[iris.variety=='Virginica'].plot.scatter(x='petal.length',y='petal.width',color='green', label='Virginica',ax=fig)
+fig.set_xlabel("petal.length")
+fig.set_ylabel("petal.width")
+fig.set_title("petal length and width")
+fig=plt.gcf()
+fig.set_size_inches(8,8)
+plt.show()
+#To display all data whose values-1.4
+petal_width=iris[iris['petal.length']==1.4]
+display(petal_width)
+#To known the how many times each value in petal length is given 
+count=iris.groupby('petal.length')['petal.length'].count()
+display(count)
+#To find the sum of petal length column
+sum=iris['petal.length'].sum()
+display(sum)
+#To known the max size of sepal width column
+max=iris['sepal.width'].max()
+display(max)
+
+
+
+
