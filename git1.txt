@@ -1,0 +1,18 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+data=pd.read_csv(r"C:\Users\THARUNREDDY\Desktop\dataset\salary.csv")
+display(data)
+fig=plt.figure(figsize=(10,6),facecolor="red",edgecolor='black')
+plt.plot(data,color='black',marker='D',markersize=7,linewidth=3)
+plt.title('Salary vs YearsExperience')
+plt.legend()
+plt.xlabel('YearsExperience')
+plt.ylabel('Salary')
+plt.show()
+fig=plt.figure(figsize=(10,6),facecolor='green',edgecolor='red')
+plt.subplot(122)
+plt.plot(data,color='red',linestyle='--',marker='o',linewidth=3)
+plt.title('Salary vs YearsExperience',color='black')
+plt.legend()
+plt.xlabel('YearsExperience',color='black')
+plt.ylabel('Salary',color='black')
